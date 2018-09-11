@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 const resumeSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    title: {type:String, required: true},
+    user: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true} ,
     description: {type:String, required: true},
     license: {type:String, required: true},
     certifications: String,
     date: { type: Date, default: Date.now },
-    postImage: String
+    documentUpload: String
 
 });
 

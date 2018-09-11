@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     role:{type: String, required: true},
+    name:String,
     email:{
         type: String, 
         required: true, 

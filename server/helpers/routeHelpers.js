@@ -21,7 +21,8 @@ module.exports = {
 
     schemas:{
         userSchema: Joi.object().keys({
-            //signupmethod: Joi.string().required(),
+            role: Joi.string().required(),
+            name: Joi.string(),
             email: Joi.string().email().required(),
             password: Joi.string().required()
         }),
@@ -30,18 +31,18 @@ module.exports = {
             user: Joi.string().required(),
             description: Joi.string().required(),
             license:  Joi.string().required(),
-            certifications:  Joi.string().required(),
+            certifications:  Joi.string(),
             date:  Joi.string().isoDate(),
             documentUpload:  Joi.string().dataUri()
 
         }),
 
-        CVSchema: Joi.object().keys({
+        postSchema: Joi.object().keys({
             user: Joi.string().required(),
             title: Joi.string().required(),
             description: Joi.string().required(),
             license:  Joi.string().required(),
-            certifications:  Joi.string().required(),
+            certifications:  Joi.string(),
             date:  Joi.string().isoDate(),
             documentUpload:  Joi.string().dataUri()
 

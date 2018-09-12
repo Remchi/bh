@@ -46,6 +46,16 @@ module.exports = {
             date:  Joi.string().isoDate(),
             documentUpload:  Joi.string().dataUri()
 
+        }),
+
+        eventSchema: Joi.object().keys({
+            user: Joi.string().required(),
+            topic: Joi.string().required(),
+            description: Joi.string().required(),
+            type:Joi.string().required(),
+            date:  Joi.string().isoDate(),
+            documentUpload:  Joi.string().dataUri()
+
         })
 
     }

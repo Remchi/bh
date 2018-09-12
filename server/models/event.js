@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
-const resumeSchema = mongoose.Schema({
+const eventSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     userId: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true} ,
+    topic: {type:String, required: true},
     description: {type:String, required: true},
-    license: {type:String, required: true},
-    certifications: String,
-    CVdocs: String,
+    type: {type:String, required: true},
+    eventImage: String,
     date: { type: Date, default: Date.now }
 
 });
 
-module.exports = mongoose.model("CV", resumeSchema);
+module.exports = mongoose.model("Event", eventSchema);

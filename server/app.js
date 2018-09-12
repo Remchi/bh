@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 //connect to the database
-mongoose.connect('mongodb://localhost/restshop');
+mongoose.connect('mongodb://localhost/bh');
 //"C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe"
 //Initialize express and save it in a constant called app
 const app = express();
@@ -31,11 +31,12 @@ app.use((req, res, next) => {
     next();
   });
 
-  //set up the 3 routes of order, product and user
+  //set up the 3 routes of posts, resumes and user
 app.use('/users', require('./routes/users'));
-app.use('/post', require('./routes/post'));
-app.use('/courses', require('./routes/courses'));
-app.use('/products', require('./routes/products'));
+app.use('/post', require('./routes/posts'));
+//app.use('/courses', require('./routes/courses'));
+app.use('/CV', require('./routes/resumes'));
+
 
 
 app.use((req, res, next) => {

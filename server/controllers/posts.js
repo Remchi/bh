@@ -128,10 +128,20 @@ module.exports = {
 
     //update a post
     updatePost: async(req, res, next)=>{
-        postId = req.params.id;
+        postId = req.params.postId;
 
         try{
-            const post  = await findByIdAndUpdate({postId, })
+            const post  = await findByIdAndUpdate(postId, req.value.body,{new: true});
+
+            //console.log and check if post has a property of ok
+            console.log("Check and see if post has a property of ok", post.ok);
+            res.status(200).json({
+                request:{
+                    message:  "To see your updated post, click link below",
+                    type: "GET",
+                    link: "http://localhost:3000"+postId
+                }
+            })
 
         }catch(error){
             
@@ -140,10 +150,27 @@ module.exports = {
 
     //delete a post
     deletePost: async(req, res, next)=>{
+        const postId = req.params.postId;
+
         try{
+            const result = await Post.remove({_id: postId });
+
+            if(result.ok){
+                res.status(200).json({
+                    message: "The post has been removed",
+                    request:{
+                        message: "Use the url link below to create a new post",
+                        type: "POST",
+                        link: "http://localhost:3000/post"
+                    }
+                })
+            }
 
         }catch(error){
-            
+            res.status(500).json({
+                message: "There has been an error deleting your post",
+                error
+            });
         }
     }
 }

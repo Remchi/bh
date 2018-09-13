@@ -2,6 +2,7 @@ const express = require("express");
 const router = require("express-promise-router")();
 const {validateBody, schemas } = require("../helpers/routeHelpers");
 const PostController = require("../controllers/posts");
+const multer = require('multer');
 //const checkAuth = require('../middleware/check-auth');
 
 const storage = multer.diskStorage({

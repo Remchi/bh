@@ -5,6 +5,7 @@ const {validateBody, schemas } = require("../helpers/routeHelpers");
 
 const CVController = require("../controllers/resumes");
 //const checkAuth = require('../middleware/check-auth');
+const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){

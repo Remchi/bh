@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 //connect to the database
-mongoose.connect('mongodb://localhost/bh');
+mongoose.connect('mongodb://localhost/bh', { useNewUrlParser: true });
 //"C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe"
 //Initialize express and save it in a constant called app
 const app = express();
@@ -32,7 +32,7 @@ app.use((req, res, next) => {
   });
 
   //set up the 3 routes of posts, resumes and user
-//app.use('/users', require('./routes/users'));
+app.use('/users', require('./routes/users'));
 app.use('/post', require('./routes/posts'));
 //app.use('/courses', require('./routes/courses'));
 //app.use('/CV', require('./routes/resumes'));
@@ -53,5 +53,7 @@ app.use((req, res, next) => {
       }
     });
   });
+
+  
   
 module.exports=app;

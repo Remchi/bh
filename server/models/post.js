@@ -7,7 +7,8 @@ const postSchema = mongoose.Schema({
     description: {type:String, required: true},
     license: {type:String, required: true},
     certifications: String,    
-    postImage: String,
+   // postImage: String,
+    postImage: { data: Buffer, contentType: String },
     date: { type: Date, default: Date.now }
 
 });

@@ -14,41 +14,49 @@ module.exports = {
 
         try{
 
-            const userExists = await User.findById(userId);
+            const user = await User.findById(userId);
 
-            if(!userExists){
+            const CVexists = await CV.find({userId:user._id});
+
+            if(!user){
                 return res.status(404).json({
                     message:"You cannot create a CV unless you are user"
                 });
             }
 
-            const newCV = new CV({
-                _id: mongoose.Types.ObjectId(),
-                userId,
-                description,
-                license,
-                certifications,
-                CVdocs
-            });
-
-            await newCV.save();
-
-            res.status(201).json({
-                message: "You have created a CV",
-
-                createdCV:{
-                    Description: newCV.description,
-                    License: newCV.license,
-                    Certification: newCV.certifications,
-                    Docs: newCV.CVdocs
-                },
-
-                request:{
-                    type: "GET",
-                    url: 'http://localhost:3000/CVs/'+newCV._id
-                }
-
-            })            
+            if(!CVexists){
+                const newCV = new CV({
+                    _id: mongoose.Types.ObjectId(),
+                    userId,
+                    description,
+                    license,
+                    certifications,
+                    CVdocs
+                });
+    
+                await newCV.save();
+    
+                res.status(201).json({
+                    message: "You have created a CV",
+    
+                    createdCV:{
+                        Description: newCV.description,
+                        License: newCV.license,
+                        Certification: newCV.certifications,
+                        Docs: newCV.CVdocs
+                    },
+    
+                    request:{
+                        type: "GET",
+                        url: 'http://localhost:3000/CVs/'+newCV._id
+                    }
+    
+                }) 
+            }else{
+                res.status(500).json({
+                    message: "You can only have on resume"
+                })
+            }           
 
         }catch(error){
             res.status(500).json({

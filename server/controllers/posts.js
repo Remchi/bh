@@ -10,9 +10,8 @@ module.exports = {
         const description = req.value.body.description;
         const license = req.value.body.license;
         const certifications = req.value.body.certifications;
-        const postImage = req.file.path,
-
-
+        const postImage = req.file.path;
+        
         try{
 
             const userExists = await User.findById(userId);
@@ -64,9 +63,9 @@ module.exports = {
 
     //read single post
     readPostById: async(req, res, next)=>{
-        postId = req.params.postId;
+        const id = req.params.id;
         try{            
-            const post = await Post.findById(postId);
+            const post = await Post.findById(id);
 
             res.status(200).json({
                 message: "Here is the post you requested",

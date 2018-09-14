@@ -6,8 +6,10 @@ const eventSchema = mongoose.Schema({
     topic: {type:String, required: true},
     description: {type:String, required: true},
     type: {type:String, required: true},
+    date: Date,
+    location: {type: String, required: true},
     eventImage: String,
-    date: { type: Date, default: Date.now }
+    
 
 });
 

@@ -29,13 +29,13 @@ app.use((req, res, next) => {
       return res.status(200).json({});
     }
     next();
-  });
+});
 
   //set up the 3 routes of posts, resumes and user
 app.use('/users', require('./routes/users'));
 app.use('/post', require('./routes/posts'));
 //app.use('/courses', require('./routes/courses'));
-//app.use('/CV', require('./routes/resumes'));
+app.use('/CV', require('./routes/resumes'));
 
 
 
@@ -56,4 +56,4 @@ app.use((req, res, next) => {
 
   
   
-module.exports=app;
+module.exports = app;

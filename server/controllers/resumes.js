@@ -9,8 +9,7 @@ module.exports = {
         const description = req.value.body.description;
         const license = req.value.body.license;
         const certifications = req.value.body.certifications;
-        const CVdocs = req.file.path,
-
+        const CVdocs = req.file.path
 
         try{
 

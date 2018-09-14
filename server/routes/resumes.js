@@ -27,17 +27,17 @@ const upload = multer({
 //create a post
 //user needs to be authenticated
 
-router.route('/').post(upload.array("CVdocs"), validateBody(schemas.CVSchema), CVController.createPost);
+router.route('/').post(upload.array("CVdocs"), validateBody(schemas.CVSchema), CVController.createCV);
 
 //read a single post
-router.route('/:id').get(CVController.readPostById);
+router.route('/:id').get(CVController.readCVById);
 
 //update a post
 //user needs to be authenticated
-router.route('/:id').patch(validateBody(schemas.CVSchema), CVController.updatePost)
+router.route('/:id').patch(validateBody(schemas.CVSchema), CVController.updateCV)
 
 //delete a post
 //user needs to be authenticated
-router.route('/:id').delete(CVController.deletePost);
+router.route('/:id').delete(CVController.deleteCV);
 
 module.exports = router;

@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 
   //set up the 3 routes of posts, resumes and user
 app.use('/users', require('./routes/users'));
-app.use('/post', require('./routes/posts'));
+app.use('/posts', require('./routes/posts'));
 //app.use('/courses', require('./routes/courses'));
 app.use('/CV', require('./routes/resumes'));
 

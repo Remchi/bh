@@ -19,9 +19,6 @@ const userSchema = mongoose.Schema({
     password: {
         type:String, required: true
     }
-    
-    
-
 });
 
 //this method gets called before the mongoose save method on object User

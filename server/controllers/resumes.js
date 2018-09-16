@@ -5,17 +5,23 @@ const User = require('../models/user')
 module.exports = {
     //create a CV
     createCV: async(req, res, next)=>{
-        const userId = req.value.body.userId;
-        const description = req.value.body.description;
-        const license = req.value.body.license;
-        const certifications = req.value.body.certifications;
-        const CVdocs = req.file.path
-
+            
         try{
+
+            const userId = req.value.body.userId;
+            const license = req.value.body.license;
+            const description = req.value.body.description;
+            const certifications = req.value.body.certifications;
+            //const CVdocs = req.value.file.path;
+           //const {userIdId, license, description, certifications} = req.value.body;
 
             const user = await User.findById(userId);
 
+            console.log("This is the user: ", user)
+
             const CVexists = await CV.find({userId:user._id});
+
+            console.log("Does the CV exist? ", CVexists.length);
 
             if(!user){
                 return res.status(404).json({
@@ -23,40 +29,42 @@ module.exports = {
                 });
             }
 
-            if(!CVexists){
-                const newCV = new CV({
-                    _id: mongoose.Types.ObjectId(),
-                    userId,
-                    description,
-                    license,
-                    certifications,
-                    CVdocs
-                });
-    
-                await newCV.save();
-    
-                res.status(201).json({
-                    message: "You have created a CV",
-    
-                    createdCV:{
-                        Description: newCV.description,
-                        License: newCV.license,
-                        Certification: newCV.certifications,
-                        Docs: newCV.CVdocs
-                    },
-    
-                    request:{
-                        type: "GET",
-                        url: 'http://localhost:3000/CVs/'+newCV._id
-                    }
-    
-                }) 
-            }else{
-                res.status(500).json({
-                    message: "You can only have on resume"
+            if(CVexists.length>0){
+                return res.status(500).json({
+                    message: "You can only have one resume"
                 })
-            }           
+            }
 
+            console.log("I am before save");
+            
+            const newCV = new CV({
+                _id: mongoose.Types.ObjectId(),
+                userId:userId,
+                license:license,
+                description:description,                    
+                certifications:certifications
+                //CVdocs:CVdocs
+            });
+
+            await newCV.save();
+            
+            console.log("here is the new CV", newCV);
+            res.status(201).json({
+                message: "You have created a CV",
+
+                createdCV:{
+                    Description: newCV.description,
+                    License: newCV.license,
+                    Certification: newCV.certifications,
+                    //Docs: newCV.CVdocs
+                },
+
+                request:{
+                    type: "GET",
+                    url: 'http://localhost:3000/cv/'+newCV._id
+                }
+
+            }) 
         }catch(error){
             res.status(500).json({
                 message: "There has been an error saving your CV",
@@ -67,17 +75,28 @@ module.exports = {
 
     //read single CV
     readCVById: async(req, res, next)=>{
-        const id = req.params.id;
-        try{            
-            const CV = await CV.findById(id);
+        
+        try{      
+            const id = req.params.id;      
+            const result = await CV.findById(id).populate('userId', 'email name');
+
+            console.log("this is the retrieved CV: ", result);
+
+            if(!result){
+                return res.status(404).json({
+                    message:"Yikes, no resume/CV at this moment"
+                });
+            }
 
             res.status(200).json({
                 message: "Here is the CV you requested",
-                CV,
+                name: result.userId.email,
+                license: result.license,
+                description: result.description,
                 request: {
                     message: "To see all the CVs, click the link below",
                     type: "GET",
-                    url: 'http://localhost:3000/readCVs'
+                    url: 'http://localhost:3000/allcvs'
                 }
             })
         }catch(error){
@@ -92,7 +111,7 @@ module.exports = {
     readCVs: async(req, res, next)=>{
         
         try{            
-            const allCVs = await CV.find({}).populate("user", "name");
+            const allCVs = await CV.find({}).populate("userId", "name");
 
             //check if allProduct is null
             if(allCVs <1){

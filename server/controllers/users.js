@@ -44,6 +44,8 @@ module.exports = {
             console.log("The new user is: ",newUser);
             await newUser.save();
 
+            //console log user to see if the password has been encrypted
+            console.log("This is the password of the new user ", newUser.password);
             //Generate the token
             const token = signToken(newUser);
             console.log(token);

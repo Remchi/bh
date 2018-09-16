@@ -22,23 +22,23 @@ module.exports = {
     schemas:{
         userSchema: Joi.object().keys({
             role: Joi.string().required(),
-            name: Joi.string(),
-            email: Joi.string().email().required(),
+            name: Joi.string().allow("").optional(),
+            email: Joi.string().email({ minDomainAtoms: 2 }).required(),
             password: Joi.string().required()
         }),
 
         CVSchema: Joi.object().keys({
-            user: Joi.string().required(),
-            description: Joi.string().required(),
+            userId: Joi.string().alphanum().required(),
             license:  Joi.string().required(),
-            certifications:  Joi.string(),
+            description: Joi.string().optional(),            
+            certifications:  [Joi.string().allow("").optional()],
             date:  Joi.string().isoDate(),
-            documentUpload:  Joi.string().dataUri()
+            //CVdocs:  Joi.string().optional()
 
         }),
 
         postSchema: Joi.object().keys({
-            user: Joi.string().required(),
+            userId: Joi.string().required(),
             title: Joi.string().required(),
             description: Joi.string().required(),
             license:  Joi.string().required(),
@@ -49,7 +49,7 @@ module.exports = {
         }),
 
         eventSchema: Joi.object().keys({
-            user: Joi.string().required(),
+            userId: Joi.string().required(),
             topic: Joi.string().required(),
             description: Joi.string().required(),
             type:Joi.string().required(),

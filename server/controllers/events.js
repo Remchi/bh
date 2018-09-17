@@ -1,18 +1,12 @@
 const mongoose = require('mongoose')
-const communityEvent = require("../models/communityEvent")
+const communityEvent = require("../models/event")
 const User = require('../models/user')
 
 module.exports = {
     //create a communityEvent
     createEvent: async(req, res, next)=>{
-        const userId = req.value.body.userId;
-        const topic = req.value.body.topic;
-        const description = req.value.body.description;
-        const type = req.value.body.type;
-        const eventImage = req.file.path,
-
-
         try{
+            const {userId, topic, description, location, type, date, eventImage} = req.value.body;
 
             const userExists = await User.findById(userId);
 
@@ -22,30 +16,34 @@ module.exports = {
                 });
             }
 
-            const communityEvent = new communityEvent({
+            const commEvent = new communityEvent({
                 _id: mongoose.Types.ObjectId(),
                 userId,
                 topic,
                 description,
+                location,
                 type,
-                eventImage
+                date,
+               // eventImage: req.file.path
             });
 
-            await communityEvent.save();
+            await commEvent.save();
 
             res.status(201).json({
-                message: "You have created a communityEvent",
+                message: "Here is the event you created",
 
                 createdEvent:{
-                    Topic: communityEvent.topic,
-                    Description: communityEvent.description,                    
-                    Type: communityEvent.type,
-                    Images: communityEvent.eventImage
+                    Topic: commEvent.topic,
+                    Description: commEvent.description,                    
+                    Type: commEvent.type,
+                    Date: commEvent.date,
+                    Location: commEvent.location
+                    //Images: commEvent.eventImage
                 },
 
                 request:{
                     type: "GET",
-                    url: 'http://localhost:3000/events/'+communityEvent._id
+                    url: 'http://localhost:3000/events/'+commEvent._id
                 }
 
             })            
@@ -60,13 +58,17 @@ module.exports = {
 
     //read single communityEvent
     readEventById: async(req, res, next)=>{
-        const id = req.params.id;
+        
         try{            
-            const communityEvent = await communityEvent.findById(id);
+            const id = req.params.id;
+            const commEvent = await communityEvent.findById(id).populate('userId', 'name');
 
             res.status(200).json({
                 message: "Here is the event you requested",
-                communityEvent,
+                Presenter: commEvent.userId.name,
+                Topic: commEvent.topic,
+                Description: commEvent.description,
+                Date: commEvent.date,
                 request: {
                     message: "To see all the events, click the link below",
                     type: "GET",

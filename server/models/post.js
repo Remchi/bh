@@ -5,10 +5,10 @@ const postSchema = mongoose.Schema({
     userId: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true} ,
     title: {type:String, required: true},
     description: {type:String, required: true},
-    license: {type:String, required: true},
-    certifications: String,    
+    license: [{type:String, required: true}],
+    certifications: [{type:String}],    
    // postImage: String,
-    postImage: { data: Buffer, contentType: String },
+    postImage: { data: Buffer},
     date: { type: Date, default: Date.now }
 
 });

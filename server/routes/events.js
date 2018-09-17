@@ -1,17 +1,18 @@
 const express = require("express");
 const router = require("express-promise-router")();
 const {validateBody, schemas } = require("../helpers/routeHelpers");
-const PostController = require("../controllers/posts");
+const EventController = require("../controllers/events");
 
 //const checkAuth = require('../middleware/check-auth');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, "./uploads/posts");
+        cb(null, "./uploads/events");
     },
 
     filename: function(req, file, cb){
+        console.log("Please work....", req.body.userId);
         cb(null, new Date().toISOString().replace(/:/g, '-')+file.originalname);
     }
 
@@ -49,21 +50,20 @@ const upload = multer({
 //create a post
 //user needs to be authenticated
 
-router.route('/').post(upload.array("postImage"), validateBody(schemas.postSchema), PostController.createPost);
+router.route('/').post(upload.array("eventImage"), validateBody(schemas.eventSchema), EventController.createEvent);
 
 //read many posts
-router.route('/').get(PostController.readPosts);
-
+router.route('/').get(EventController.readEvents);
 //read a single post
-router.route('/:id').get(PostController.readPostById);
+router.route('/:id').get(EventController.readEventById);
 
 //update a post
 //user needs to be authenticated
-router.route('/:id').patch(validateBody(schemas.postSchema), PostController.updatePost)
+router.route('/:id').patch(validateBody(schemas.eventSchema), EventController.updateEvent)
 
 //delete a post
 //user needs to be authenticated
-router.route('/:id').delete(PostController.deletePost);
+router.route('/:id').delete(EventController.deleteEvent);
 
 module.exports = router;
 

@@ -31,7 +31,7 @@ module.exports = {
             userId: Joi.string().alphanum().required(),
             license:  Joi.string().required(),
             description: Joi.string().optional(),            
-            certifications:  [Joi.string().allow("").optional()],
+            certifications:  Joi.array().items(Joi.string()),
             date:  Joi.string().isoDate(),
             //CVdocs:  Joi.string().optional()
 
@@ -41,20 +41,21 @@ module.exports = {
             userId: Joi.string().required(),
             title: Joi.string().required(),
             description: Joi.string().required(),
-            license:  Joi.string().required(),
-            certifications:  Joi.string(),
-            date:  Joi.string().isoDate(),
-            documentUpload:  Joi.string().dataUri()
-
+            license: Joi.array().items(Joi.string()).required() ,
+            certifications:  Joi.array().items(Joi.string()),
+            postImage:  Joi.string(),
+            date:  Joi.string().isoDate()           
         }),
 
         eventSchema: Joi.object().keys({
             userId: Joi.string().required(),
             topic: Joi.string().required(),
             description: Joi.string().required(),
-            type:Joi.string().required(),
-            date:  Joi.string().isoDate(),
-            documentUpload:  Joi.string().dataUri()
+            location: Joi.string().required(),
+            type: Joi.string().required(),
+            date: Joi.date(),
+            time: Joi.date().timestamp('unix'),
+            eventImage:  Joi.string().dataUri()
 
         })
 

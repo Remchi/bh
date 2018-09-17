@@ -1,0 +1,6 @@
+Cannot add image/upload file path to the database - therefor cannot present it to the user
+--can add userId in file path but cannot isolate
+--want to
+
+Cannot validate time of event using Joi
+Cannot retrieve date in easy to read format

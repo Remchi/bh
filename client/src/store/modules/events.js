@@ -14,19 +14,43 @@ const getters = {
 },
 
 const mutations = {
-    addEvents: (state, events)=>state.events.push(events),
-    addToAllEvents: (state, events)=>state.allEvents.push(events)
+
+    EVENTS:(state, payload)=>state.events = payload,
+    ADD_EVENT:(state, payload)=>state.events.unshift(payload)
+
+    //there needs to be UPDATE_EVENT, DELETE_EVENT
+    // addEvents: (state, events)=>state.events.push(events),
+    // addToAllEvents: (state, events)=>state.allEvents.push(events)
 
 }
 
 const actions = {
-    async getAllEvents(){
+    async getAllEvents(context, payload){
         try{
-            const dbevents = await axios.get("/events")
+            const response = await axios.get("/events");
 
-
+            context.commit("EVENTS", response);
         }catch(error){
+            res.status(404).json({
+                message: "There has been an error fetching all the events",
+                error
+            })
+        }
+    },
 
+    async addEvent(context, payload){
+        try{
+            const response = await axios.post('/events',{
+                data: payload,
+                headers: {'Content-Type':'application/json'}
+            } );
+
+            context.commit("ADD_EVENT", response.data);
+        }catch(error){
+            res.status(404).json({
+                message: "There has been an error adding your event",
+                error
+            })
         }
     }
 }

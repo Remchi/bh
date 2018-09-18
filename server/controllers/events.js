@@ -87,24 +87,25 @@ module.exports = {
     readEvents: async(req, res, next)=>{
         
         try{            
-            const communityEvents = await communityEvent.find({}).populate("user", "name");
+            const commEvents = await communityEvent.find({}).populate("userId", "name");
 
             //check if allProduct is null
-            if(communityEvents <1){
+            if(commEvents <1){
                 return res.status(404).json({
                     message: "No communityEvents at this moment"
                 })
             }
 
             res.status(200).json({
-                count: communityEvents.length,
-                communityEvents: communityEvents.map(communityEvent=>{
+                count: commEvents.length,
+                communityEvents: commEvents.map(communityEvent=>{
                     return{
                         _id: communityEvent._id,
+                        Presenter: communityEvent.userid.name,
                         Title: communityEvent.title,
                         Description: communityEvent.description,   
                         Type: communityEvent.type,                    
-                        Images: communityEvent.images,
+                        //Images: communityEvent.images,
                         request: {
                             type: "GET",
                             message: "To see more about the event, click on this link",

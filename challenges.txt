@@ -4,3 +4,5 @@ Cannot add image/upload file path to the database - therefor cannot present it t
 
 Cannot validate time of event using Joi
 Cannot retrieve date in easy to read format
+
+To retrieve index of an object in an array, see: https://stackoverflow.com/questions/8668174/indexof-method-in-an-object-array

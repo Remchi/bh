@@ -52,6 +52,23 @@ const actions = {
                 error
             })
         }
+    },
+
+    async updateEvent(context, payload){
+        try{
+            const response = await axios.patch('/events', {
+                data: payload,
+                headers: {'Content-Type':'application/json'}
+            });
+
+            context.commit("UPDATE_EVENT", response.data);
+
+        }catch(error){
+            res.status(404).json({
+                message: "There has been an error updating your event",
+                error
+            })
+        }
     }
 }
 

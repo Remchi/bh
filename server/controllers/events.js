@@ -6,7 +6,7 @@ module.exports = {
     //create a communityEvent
     createEvent: async(req, res, next)=>{
         try{
-            const {userId, topic, description, location, type, date, eventImage} = req.value.body;
+            const {userId, topic, description, location, type, date} = req.value.body;
 
             const userExists = await User.findById(userId);
 
@@ -83,6 +83,14 @@ module.exports = {
         }
     },
 
+    readUserEvents: async(req, res, next)=>{
+        try{
+            const userExists = await User.find()
+        }catch(error){
+
+        }
+    },
+
     //read all the communityEvents
     readEvents: async(req, res, next)=>{
         
@@ -101,7 +109,7 @@ module.exports = {
                 communityEvents: commEvents.map(communityEvent=>{
                     return{
                         _id: communityEvent._id,
-                        Presenter: communityEvent.userid.name,
+                        Presenter: communityEvent.userId.name,
                         Title: communityEvent.title,
                         Description: communityEvent.description,   
                         Type: communityEvent.type,                    
@@ -125,9 +133,9 @@ module.exports = {
 
     //update a communityEvent
     updateEvent: async(req, res, next)=>{
-        const id = req.params.id;
-
+        
         try{
+            const id = req.params.id;
             const communityEvent  = await findByIdAndUpdate(id, req.value.body,{new: true});
             //console.log and check if communityEvent is ok
             console.log("This is event.ok", communityEvent.ok);

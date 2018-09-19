@@ -66,5 +66,6 @@ module.exports = {
         //console.log(token);
 
         res.status(200).json({token});
-    }
+    }  
+
 }

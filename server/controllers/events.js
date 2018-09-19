@@ -6,13 +6,13 @@ module.exports = {
     //create a communityEvent
     createEvent: async(req, res, next)=>{
         try{
-            const {userId, topic, description, location, type, date, eventImage} = req.value.body;
+            const {userId, topic, description, location, type, date} = req.value.body;
 
             const userExists = await User.findById(userId);
 
-            if(!userExists){
+            if(userExists.role!=="employer"){
                 return res.status(404).json({
-                    message:"You cannot create a communityEvent unless you are user"
+                    message:"Only organizations and employers can create an event"
                 });
             }
 
@@ -101,7 +101,7 @@ module.exports = {
                 communityEvents: commEvents.map(communityEvent=>{
                     return{
                         _id: communityEvent._id,
-                        Presenter: communityEvent.userid.name,
+                        Presenter: communityEvent.userId.name,
                         Title: communityEvent.title,
                         Description: communityEvent.description,   
                         Type: communityEvent.type,                    
@@ -122,7 +122,7 @@ module.exports = {
             });
         }
     },
-
+    
     //update a communityEvent
     updateEvent: async(req, res, next)=>{
         const id = req.params.id;
@@ -172,5 +172,46 @@ module.exports = {
                 error
             });
         }
+
+    },
+
+    eventsByUser: async(req, res, next)=>{
+        try{
+            const userEvents = await communityEvent.find({userId: req.params.user_id}).populate("userId");
+
+            if(userEvents.length<1){
+                return res.status(500).json({
+                    message: "You have no events you have created at this moment",
+                    request:{
+                        type: "GET",
+                        message: "Click on the link below to create an event",
+                        link: "http://localhost:3000/events"
+                    }            
+                })
+            }
+
+            res.status(200).json({
+                message: "You have "+userEvents.length,
+                yourEvents:userEvents.map(event=>{
+                    return{
+                        Presenter: event.userId.name,
+                        Topic: event.topic,
+                        Description: event.description,
+                        Time: event.time,
+                        Location:event.location
+                        //Need a way to incorporate images
+                    }
+                })
+    
+            })
+           
+            
+        }catch(error){
+            res.status(500).json({
+                message: "There has been an error fetching events by you",
+                error
+            });
+        }
     }
+
 }

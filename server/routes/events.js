@@ -57,6 +57,10 @@ router.route('/').get(EventController.readEvents);
 //read a single post
 router.route('/:id').get(EventController.readEventById);
 
+//read posts by a single user
+//user needs to be authenticated
+router.route('/:id').get(EventController.readUserEvents)
+
 //update a post
 //user needs to be authenticated
 router.route('/:id').patch(validateBody(schemas.eventSchema), EventController.updateEvent)

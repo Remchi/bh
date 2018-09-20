@@ -34,7 +34,7 @@ app.use((req, res, next) => {
   //set up the 3 routes of posts, resumes and user
 app.use('/users', require('./routes/users'));
 app.use('/job', require('./routes/posts'));
-//app.use('/courses', require('./routes/courses'));
+app.use('/questions', require('./routes/questions'));
 app.use('/cv', require('./routes/resumes'));
 app.use('/events', require('./routes/events'));
 

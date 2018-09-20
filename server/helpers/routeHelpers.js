@@ -56,8 +56,17 @@ module.exports = {
             date: Joi.date(),
             time: Joi.date().timestamp('unix'),
             eventImage:  Joi.string().dataUri()
+        }),
 
-        })
+        questionSchema: Joi.object().keys({
+          
+            answer: Joi.number().required(),
+            choices: Joi.array().items(Joi.string()).required(),
+            question:  Joi.string().required(),
+            rationale:  Joi.string().required()
+                   
+        }),
+    
 
     }
 }

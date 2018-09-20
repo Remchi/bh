@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Post = require("../models/post")
 const User = require('../models/user')
-const fs = require('fs')
+//const fs = require('fs')
 
 module.exports = {
     //create a post

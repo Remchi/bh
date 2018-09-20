@@ -83,6 +83,14 @@ module.exports = {
         }
     },
 
+    readUserEvents: async(req, res, next)=>{
+        try{
+            const userExists = await User.find()
+        }catch(error){
+
+        }
+    },
+
     //read all the communityEvents
     readEvents: async(req, res, next)=>{
         
@@ -125,9 +133,9 @@ module.exports = {
     
     //update a communityEvent
     updateEvent: async(req, res, next)=>{
-        const id = req.params.id;
-
+        
         try{
+            const id = req.params.id;
             const communityEvent  = await findByIdAndUpdate(id, req.value.body,{new: true});
             //console.log and check if communityEvent is ok
             console.log("This is event.ok", communityEvent.ok);

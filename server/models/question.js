@@ -3,6 +3,7 @@ let mongoose = require('mongoose');
 let db = mongoose.connect('mongodb://localhost/bh');
 
 let QuestionSchema =  mongoose.Schema({
+    
     answer: Number,
     choices: Array,
     question: String,
@@ -11,7 +12,6 @@ let QuestionSchema =  mongoose.Schema({
 
 let Question = mongoose.model("Question", QuestionSchema, 'questions');
 let questionBank =
-[
     {
         "-L9Qzmwd_vSeklCcwXZ_" : {
           "answer" : 0,
@@ -4359,33 +4359,19 @@ let questionBank =
           "rationale" : "The Bill of Rights are legislative actions that are included in the Washington Administrative Code (WAC).  We must follow these rights as they are law.  If we do not follow them, we are at risk of ourselves and the facility receiving lawsuits against us.  "
         }
     }
-];
+;
 
 
     //Add collections
-for(collection in questionBank) {
-
-	//print("Working on collection " + collection + "..");
-
- 	//Delete any previous data..
-	//db[collection].remove({});
-
-	for (key in questionBank[collection]) {
-        let doc  = questionBank[collection][key];
-        
-       // let doc  = questionBank[collection];
-        //doc.firebaseId = key; //Add the object key to the new document, for later reference 
-        
-       // db[collection].insert(doc);
-        
-        Question.collection.insert(doc)
-        .then(response=>{
-            console.log("The collection was created ");
-        }).catch(err=>{
-            console.log("There has been an error")
-            err
-        });
-        
-	}
-
-}
+    for(let [index,value] of Object.entries(Object.values(objArray))){
+      //...
+     // console.log("Is this the damn index?", index);
+      //console.log("Is this the damn value?", value.name, value.city);
+        Question.insert({
+            //_id: mongoose.Schema.Types.ObjectId,
+            "answer": value.answer,
+            "choices": value.choices,
+            "question": value.question,
+            "rationale": value.rationale
+        })
+    }

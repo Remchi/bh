@@ -7,7 +7,7 @@ mongoose.Promise = global.Promise;
 
 //connect to the database
 mongoose.connect('mongodb://localhost/bh', { useNewUrlParser: true });
-//"C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe"
+//
 //Initialize express and save it in a constant called app
 const app = express();
 

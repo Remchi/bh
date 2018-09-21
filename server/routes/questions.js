@@ -8,4 +8,6 @@ const QuestionController = require("../controllers/questions");
 router.route('/').post( QuestionController.insertQuestions );
 
 router.route('/').get(QuestionController.getQuestions );
+
+router.route('/10').get(QuestionController.get10Questions );
 module.exports = router;

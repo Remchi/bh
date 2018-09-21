@@ -5,6 +5,31 @@ const questionBank = require('../question')
 //get all the questions, answer choices, right answer, and rationales
 //send to the front end/vuex store
 
+async function fetchQuestions(num){
+        const allQuestions = await Question.find({});
+
+        let numOfQs = 0;
+        const questions = [];
+        const qIndexes = [];
+        while(numOfQs<num){
+            const qIndex = (Math.floor(Math.random()*724));
+            
+            // const result = qIndexes.includes(qIndex)
+            // console.log("Hre is the results ",result);
+            if(!qIndexes.includes(qIndex)){
+                qIndexes.unshift(qIndex);                 
+            }
+            
+            numOfQs++;
+            
+        }      
+        
+        for(const index of qIndexes){
+            const question = allQuestions[index];
+            questions.unshift(question);                        
+        }
+}
+
 module.exports = {
 
     insertQuestions: async(req,res, next)=>{
@@ -12,26 +37,12 @@ module.exports = {
             //Add collections
             for(let [index,value] of Object.entries(Object.values(questionBank))){
                 
-                const questions = Object.entries(value);
+                const questions = Object.values(value);
                // console.log("Here are the stupid questions", questions.length);
 
-               const questionLength = questions.length;
-
-               for(let qIndex = 0; qIndex <=questionLength; qIndex++){
-                    const question = questions[qIndex][1]["question"];
-                    const choices = questions[qIndex][1]["choices"];
-                    const answer = questions[qIndex][1]["answer"];
-                    const rationale = questions[qIndex][1]["rationale"];
-
-                    await Question.insert({
-                        _id: mongoose.Types.ObjectId(),
-                        answer,
-                        choices,
-                        question,
-                        rationale
-                    });
-               }
-                
+               
+                await Question.insertMany(questions);
+             
 
                 res.status(200).json({
                     message: "Questions have been successfully saved",
@@ -53,28 +64,23 @@ module.exports = {
     
     getQuestions: async(req,res, next)=>{
         try{
-            //Add collections
             for(let [index,value] of Object.entries(Object.values(questionBank))){
                 
-                //const qIndex = index;
-                const questions = Object.entries(value);
-                console.log("Here are the stupid questions", questions.length);
-
-               const quest = questions[0][1]["question"];
+                const questions = Object.values(value);
+                console.log("Here are the stupid questions", questions.length);                              
                
-                    res.status(200).json({
-                        // qIndex,
-                        quest,
-                        questions,
-                         message: "Questions have been successfully saved",
-                         request:{
-                             message: "To successfully view the questions, visit the link below",
-                             type: "GET",
-                             link: "http://localhost:3000/questions"
-                         }
-                     });
-               
-                
+                res.status(200).json({
+                    // qIndex,
+                   
+                    questions,
+                    
+                    message: "Questions have been successfully saved",
+                    request:{
+                        message: "To successfully view the questions, visit the link below",
+                        type: "GET",
+                        link: "http://localhost:3000/questions"
+                    }
+                });
             }
         }catch(error){
             res.status(500).json({
@@ -82,8 +88,52 @@ module.exports = {
                 error
             })
         }
-    }
+    },
     //get 10 questions
+    get10Questions: async(req, res, next)=>{
+        try{
+
+            fetchQuestions(10);
+            // const allQuestions = await Question.find({});
+
+            // let numOfQs = 0;
+            // const questions = [];
+            // const qIndexes = [];
+            // while(numOfQs<10){
+            //     const qIndex = (Math.floor(Math.random()*724));
+                
+            //    // const result = qIndexes.includes(qIndex)
+            //    // console.log("Hre is the results ",result);
+            //     if(!qIndexes.includes(qIndex)){
+            //         qIndexes.unshift(qIndex);                 
+            //     }
+                
+            //     numOfQs++;
+                
+            // }      
+            
+            // for(const index of qIndexes){
+            //     const question = allQuestions[index];
+            //     questions.unshift(question);                        
+            // }
+            
+            res.status(200).json({
+                message: "These are 10 NAC questions for practice",
+                questions
+            })            
+            
+        }catch(error){
+            res.status(500).json({
+                error
+            })
+        }
+        
+
+
+    },
 
     //get 70 random questions
+    get70Questions: async(req, res, next)=>{
+
+    }
 }

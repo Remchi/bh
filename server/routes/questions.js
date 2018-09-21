@@ -10,4 +10,8 @@ router.route('/').post( QuestionController.insertQuestions );
 router.route('/').get(QuestionController.getQuestions );
 
 router.route('/10').get(QuestionController.get10Questions );
+
+router.route('/70').get(QuestionController.get70Questions );
+
+router.route('/grade').get(QuestionController.gradeQuiz);
 module.exports = router;

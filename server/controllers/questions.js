@@ -68,12 +68,14 @@ module.exports = {
     get10Questions: async(req, res, next)=>{
         try{
 
+            //1. get all the questions from the database
             const allQuestions = await Question.find({});
 
             let numOfQs = 0;
             const questions = [];
             const qIndexes = [];
-            while(numOfQs<3){
+            //2. create an array of random indexes
+            while(numOfQs<10){
                 const qIndex = (Math.floor(Math.random()*724));
            
                 if(!qIndexes.includes(qIndex)){
@@ -83,21 +85,37 @@ module.exports = {
                 numOfQs++;
                 
             }      
+
+            //3. use the array of random indexes as keys to the questions selected from the database
         
             for(const index of qIndexes){
                 const question = allQuestions[index];
                 questions.unshift(question);                    
             }
             
-            res.status(200).json({
-                count:questions.length,
+            /**
+             * 4. the questions array has answers in an object form
+                  to grade, answers must be in an array - see gradeQuiz method below
+                  gradeQuiz should be a method in the Vue template
+             */
+            let answerArray = [];
+            for(let queIndex = 0; queIndex<questions.length; queIndex++  ){
+                answerArray.push(questions[queIndex]["answer"]);
+            }
+
+            //return the answerArray and all questions values to the view
+            res.status(200).json({                
+                answerArray,
                 message: "These are 10 NAC questions for practice",
+                //questions,
+               
                 objQuestion: questions.map(singleQuestion=>{
-                    return{
-                        answer:singleQuestion.answer,
-                        // question: singleQuestion.question,
-                        // choices: singleQuestion.choices,
-                        // rationale: singleQuestion.rationale
+            
+                    return{  
+                        answer:singleQuestion.answer,                       
+                        question: singleQuestion.question,
+                        choices: singleQuestion.choices,
+                        rationale: singleQuestion.rationale
                     }
                 })
             }) 

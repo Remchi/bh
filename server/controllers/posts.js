@@ -43,6 +43,7 @@ module.exports = {
                     Description: newJob.description,
                     License: newJob.license,
                     Certification: newJob.certifications,
+                    _id: newJob._id
                     //Image: newPost.postImage
                 },
 

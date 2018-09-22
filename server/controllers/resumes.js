@@ -56,6 +56,7 @@ module.exports = {
                     Description: newCV.description,
                     License: newCV.license,
                     Certification: newCV.certifications,
+                    _id: newCV._id
                     //Docs: newCV.CVdocs
                 },
 
@@ -112,6 +113,11 @@ module.exports = {
     readCVs: async(req, res, next)=>{
         
         try{            
+            // if(req.user.role==='jobseeker'){
+            //     return res.status(401).json({
+            //         message: "Only employers can view other candidates resumes"
+            //     })
+            // }
             const allCVs = await CV.find({}).populate("userId", "name");
 
             //check if allProduct is null

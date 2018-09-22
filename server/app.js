@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 app.use('/users', require('./routes/users'));
 app.use('/jobs', require('./routes/posts'));
 app.use('/questions', require('./routes/questions'));
-app.use('/cv', require('./routes/resumes'));
+app.use('/candidates', require('./routes/resumes'));
 app.use('/events', require('./routes/events'));
 
 

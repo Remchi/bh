@@ -93,6 +93,7 @@ module.exports = {
                 name: result.userId.email,
                 license: result.license,
                 description: result.description,
+                _id: result._id,
                 request: {
                     message: "To see all the CVs, click the link below",
                     type: "GET",

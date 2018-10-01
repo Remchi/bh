@@ -7,6 +7,7 @@ const postSchema = mongoose.Schema({
     description: {type:String, required: true},
     license: [{type:String, required: true}],
     certifications: [{type:String}],    
+    applicants:[{type: mongoose.Schema.Types.ObjectId, ref: "CV"}],
    // postImage: String,
     postImage: { data: Buffer},
     date: { type: Date, default: Date.now }

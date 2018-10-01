@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const state = {  
-    posts: []   
+    posts: [] ,
+    applicants: []
 }
 
 const getters = {

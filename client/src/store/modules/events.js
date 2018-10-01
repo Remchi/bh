@@ -18,12 +18,7 @@ const mutations = {
 
     EVENTS:(state, payload)=>state.events = payload,
     ADD_EVENT:(state, payload)=>state.events.unshift(payload),
-  //  REMOVE_EVENT:(state, payload)=>state.events.splice(indexOf(payload), 1),
-    //UPDATE_EVENT:(state, payload)=>(state.events.splice(indexOf(payload), 1, ))
-
-    //there needs to be UPDATE_EVENT, DELETE_EVENT
-    // addEvents: (state, events)=>state.events.push(events),
-    // addToAllEvents: (state, events)=>state.allEvents.push(events)
+  
 
 }
 
@@ -64,8 +59,7 @@ const actions = {
         try{
             const response = await axios.delete('/events/:id',{
                 data: payload,
-                
-               // headers: {'Content-Type':'application/json'}
+                headers: {'Content-Type':'application/json'}
             } );
 
             context.commit("REMOVE_EVENT", response.data)

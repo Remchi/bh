@@ -6,3 +6,11 @@ Cannot validate time of event using Joi
 Cannot retrieve date in easy to read format
 
 To retrieve index of an object in an array, see: https://stackoverflow.com/questions/8668174/indexof-method-in-an-object-array
+
+Sharing an event/job opening on facebook
+
+Link contains how to use CSRF in MEVN application: https://tkacz.pro/express-js-and-vue-js-secure-forms-using-csrf-token/
+
+MEVN CHAT: https://www.djamware.com/post/5b6a681f80aca76a2cbd98fb/mongodb-express-vuejs-2-nodejs-mevn-and-socketio-chat-app
+
+MEVN SHOPPING CART: https://medium.com/@jaouad_45834/full-stack-shopping-cart-with-mevn-stack-part-1-89dae1f35378

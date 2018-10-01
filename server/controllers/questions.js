@@ -64,10 +64,11 @@ module.exports = {
             })
         }
     },
-    //get 10 questions
-    get10Questions: async(req, res, next)=>{
+    //get 10 or 70 questions
+    getTest: async(req, res, next)=>{
         try{
 
+            const num = req.params.num;
             //1. get all the questions from the database
             const allQuestions = await Question.find({});
 
@@ -75,9 +76,9 @@ module.exports = {
             const questions = [];
             const qIndexes = [];
             //2. create an array of random indexes
-            while(numOfQs<10){
+            while(numOfQs<num){
                 const qIndex = (Math.floor(Math.random()*724));
-           
+                //indexes need to be unique
                 if(!qIndexes.includes(qIndex)){
                     qIndexes.unshift(qIndex);                 
                 }
@@ -106,7 +107,7 @@ module.exports = {
             //return the answerArray and all questions values to the view
             res.status(200).json({                
                 answerArray,
-                message: "These are 10 NAC questions for practice",
+                //message: "These are 10 NAC questions for practice",
                 //questions,
                
                 objQuestion: questions.map(singleQuestion=>{
@@ -128,45 +129,7 @@ module.exports = {
         }
     },
 
-    //get 70 random questions
-    get70Questions: async(req, res, next)=>{
-        try{
-
-            const allQuestions = await Question.find({});
-
-            let numOfQs = 0;
-            const questions = [];
-            const qIndexes = [];
-
-            while(numOfQs<70){
-                const qIndex = (Math.floor(Math.random()*724));
-             
-                if(!qIndexes.includes(qIndex)){
-                    qIndexes.unshift(qIndex);                 
-                }
-                
-                numOfQs++;
-                
-            }      
-        
-            for(const index of qIndexes){
-                const question = allQuestions[index];
-                questions.unshift(question);                
-            }
-            res.status(200).json({
-                count:questions.length,
-                message: "These are 70 NAC questions for practice",
-                questions
-            })  
-                 
-            
-        }catch(error){
-            res.status(500).json({
-                error
-            })
-        }
-    },
-
+   
     gradeQuiz: async(req, res, next)=>{
         try{
 

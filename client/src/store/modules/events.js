@@ -33,10 +33,7 @@ const actions = {
 
             context.commit("EVENTS", response.data);
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error fetching all the events",
-                error
-            })
+            alert(error);
         }
     },
 
@@ -49,10 +46,7 @@ const actions = {
 
             context.commit("ADD_EVENT", response.data);
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error adding your event",
-                error
-            })
+           alert(error);
         }
     },
 
@@ -66,10 +60,7 @@ const actions = {
             context.commit("REMOVE_EVENT", response.data)
 
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error deleting your event",
-                error
-            })
+            alert(error);
         }
     },
 
@@ -83,10 +74,7 @@ const actions = {
             context.commit("UPDATE_EVENT", response.data)
 
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error deleting your event",
-                error
-            })
+            alert(error);
         }
     }
 }

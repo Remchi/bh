@@ -44,10 +44,7 @@ const actions = {
 
             context.commit("CV", response.data);
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error fetching all the events",
-                error
-            })
+            console.log(error)
         }
     },
 
@@ -60,10 +57,7 @@ const actions = {
 
             context.commit("ADD_CV", response.data);
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error adding your resumes",
-                error
-            })
+            console.log(error)
         }
     },
 
@@ -78,10 +72,7 @@ const actions = {
             context.commit("REMOVE_CV", response.data)
 
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error deleting your event",
-                error
-            })
+           console.log(error)
         }
     },
 
@@ -95,10 +86,7 @@ const actions = {
             context.commit("UPDATE_CV", response.data)
 
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error deleting your event",
-                error
-            })
+            console.log(error)
         }
     }
 }

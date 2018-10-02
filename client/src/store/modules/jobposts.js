@@ -32,10 +32,7 @@ const actions = {
 
             context.commit("POSTS", response.data);
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error fetching all the posts",
-                error
-            })
+            console.log(error)
         }
     },
 
@@ -48,10 +45,7 @@ const actions = {
 
             context.commit("ADD_POST", response.data);
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error adding your post",
-                error
-            })
+            console.log(error)
         }
     },
 
@@ -66,10 +60,7 @@ const actions = {
             context.commit("REMOVE_POST", response.data)
 
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error deleting your post",
-                error
-            })
+           console.log(error)
         }
     },
 
@@ -83,10 +74,7 @@ const actions = {
             context.commit("UPDATE_POST", response.data)
 
         }catch(error){
-            res.status(404).json({
-                message: "There has been an error deleting your post",
-                error
-            })
+            console.log(error)
         }
     }
 }

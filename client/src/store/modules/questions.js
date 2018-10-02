@@ -25,10 +25,7 @@ const actions = {
             context.commit("GET_TEST", response.data);
 
         }catch(error){
-            res.status(404).json({
-                message: "There has been error fetching the test",
-                error
-            });
+            alert(error)
         }        
     }
 }

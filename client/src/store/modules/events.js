@@ -10,9 +10,10 @@ const getters = {
             - sort events by user
             - get the property length
     */
-   
-    getEvents: state =>state.events   
-},
+    getEvents: state =>state.events, 
+    getPreviewEvent: state=>state.events[0],
+     
+}
 
 const mutations = {
 

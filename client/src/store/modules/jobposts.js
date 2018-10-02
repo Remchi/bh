@@ -14,7 +14,7 @@ const getters = {
    
     getPosts: state =>state.posts,     
     numberofPOsts: state =>state.posts.length
-},
+}
 
 const mutations = {
 

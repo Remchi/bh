@@ -12,7 +12,7 @@ const getters = {
     */
    
     getCVs: state =>state.resumes 
-},
+}
 
 const mutations = {
 

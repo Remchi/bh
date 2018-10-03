@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import {store} from "../../store/store.js"
+import {store} from "../store/store"
 export default {
     data(){
         return{
@@ -71,6 +71,8 @@ export default {
             }
         }
     },
+   
+
     methods:{
 
         checkForm(e) {

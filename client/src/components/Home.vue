@@ -1,5 +1,13 @@
 <template>
     <section>
+        <main role="main" class="container p-5 mt-5">
+            <div class="jumbotron">
+                <h1>Be Part of a Community That...</h1>
+                <p class="lead">Gives care with love and compassion, shares and receives valuable knowledge about care and the challenges of caring, and supports and encourages careers in allied health.</p>
+                <a class="btn btn-lg btn-primary" href="../../components/navbar/" role="button">Join us &raquo;</a>
+            </div>
+        </main>
+        
         <div class="container">
             <!-- Example row of columns -->
             <div class="row  justify-content-center">

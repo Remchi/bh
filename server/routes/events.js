@@ -50,7 +50,7 @@ const upload = multer({
 //create a post
 //user needs to be authenticated
 
-router.route('/').post(upload.array("eventImage"), validateBody(schemas.eventSchema), EventController.createEvent);
+router.route('/').post(validateBody(schemas.eventSchema), EventController.createEvent);
 
 //read many posts
 router.route('/').get(EventController.readEvents);

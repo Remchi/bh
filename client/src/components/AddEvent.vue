@@ -7,8 +7,8 @@
                     <h4 class="text-dark display-4">Add an Event</h4>
                     <form action="" class="text-muted lead" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label for="title">Topic of Event</label>
-                        <input type="text" class="form-control form-control-lg" name="title" id="title" v-model="newEvent.title" required>
+                        <label for="topic">Topic of Event</label>
+                        <input type="text" class="form-control form-control-lg" name="topic" id="topic" v-model="newEvent.topic" required>
                     </div>
                         
                     <div class="form-group mb-3">
@@ -62,7 +62,7 @@ export default {
     data(){
         return{
             newEvent:{
-                'title': '',
+                'topic': '',
                 'description':'',
                 'location': '',
                 'audience': '',
@@ -76,13 +76,13 @@ export default {
     methods:{
 
         checkForm(e) {
-            if (this.title && this.description&&this.location&&this.audience&&this.date&&this.event) {
+            if (this.topic && this.description&&this.location&&this.audience&&this.date&&this.event) {
                 return true;
             }
 
             this.errors = [];
 
-            if (!this.title) {
+            if (!this.topic) {
                 this.errors.push('Title of the event is required.');
             }
             if (!this.description) {
@@ -113,8 +113,8 @@ export default {
         */
         addEvent(){
             if(this.checkForm){
-                const userEvent= {
-                    title: this.title,
+                const userEvent = {
+                    topic: this.topic,
                     description: this.description,
                     location: this.location,
                     audience: this.audience,

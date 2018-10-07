@@ -6,24 +6,25 @@ module.exports = {
     //create a communityEvent
     createEvent: async(req, res, next)=>{
         try{
-            const {userId, topic, description, location, type, date} = req.value.body;
+            const {/*userId,*/ topic, description, location, audience, date} = req.value.body;
 
-            const userExists = await User.findById(userId);
+            // const userExists = await User.findById(userId);
 
-            if(userExists.role!=="employer"){
-                return res.status(404).json({
-                    message:"Only organizations and employers can create an event"
-                });
-            }
+            // if(userExists.role!=="employer"){
+            //     return res.status(404).json({
+            //         message:"Only organizations and employers can create an event"
+            //     });
+            // }
 
             const commEvent = new communityEvent({
                 _id: mongoose.Types.ObjectId(),
-                userId,
+                //userId,
                 topic,
                 description,
                 location,
-                type,
+                audience,                
                 date,
+                time
                // eventImage: req.file.path
             });
 

@@ -9,7 +9,7 @@ router.route('/').post( QuestionController.insertQuestions );
 
 router.route('/').get(QuestionController.getQuestions );
 
-router.route('/:num').get(QuestionController.get10Questions );
+//router.route('/:num').get(QuestionController.get10Questions );
 
 router.route('/grade').get(QuestionController.gradeQuiz);
 module.exports = router;

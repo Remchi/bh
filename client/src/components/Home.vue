@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-4">
                 <h2 class="text-center">State Exam</h2>
-                <p>There are a lot of questions to help you prepare for CNA state written exam - no reason why you can't use them to prepare for HCA exam.  
+                <p>There are a lot of questions to help you prepare for CNA or even HCA state written exam.  You can also  
                     In due time, we will add skill videos and share with you education paths available in your local colleges and universities that can lead to higher degrees in allied health.  </p>
                 <p class="text-center"><a class="btn btn-outline-primary" href="#" role="button">Test Yourself &raquo;</a></p>
                 </div>

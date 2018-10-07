@@ -48,14 +48,14 @@ module.exports = {
         }),
 
         eventSchema: Joi.object().keys({
-            userId: Joi.string().required(),
+            //userId: Joi.string().required(),
             topic: Joi.string().required(),
             description: Joi.string().required(),
             location: Joi.string().required(),
-            type: Joi.string().required(),
+            audience: Joi.string().required(),
             date: Joi.date(),
             time: Joi.date().timestamp('unix'),
-            eventImage:  Joi.string().dataUri()
+            //eventImage:  Joi.string().dataUri()
         }),
 
         questionSchema: Joi.object().keys({

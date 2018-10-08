@@ -5,7 +5,11 @@
                 <div class="col-md-8 col-sm-10">
 
                     <h4 class="text-dark display-4">Add an Event</h4>
+<<<<<<< HEAD
                     <form method="POST" action="" class="text-muted lead" v-on:submit.prevent="sendFile" >
+=======
+                    <form action="" class="text-muted lead" >
+>>>>>>> dd1b77cfad2859714f7df0f203e173d81aaae482
                     <div class="form-group">
                         <label for="topic">Topic of Event</label>
                         <input type="text" class="form-control form-control-lg" name="topic" id="topic" v-model="newEvent.topic" required>
@@ -26,8 +30,8 @@
                         <input type="text" class="form-control" name="audience" id="audience" v-model="newEvent.audience" required>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-4 col-sm-10">
+                 <!--   <div class="row">
+                        <div class="col-md-6 col-sm-10">
                             <div class="form-group">
                                 <label for="date">Date of Event</label>
                                 <input type="text" class="form-control" name="date" id="date" placeholder="MM/DD/YYYY" v-model="newEvent.date" required>
@@ -49,13 +53,13 @@
                         </div>
                     </div>                      
                     
-                 <!--   <p>Share more about your event</p>
+                  <p>Share more about your event</p>
                         <div class="custom-file mb-3">
                             <input type="file" class="custom-file-input" id="attachment">
                             <label class="custom-file-label" for="attachment">Upload!</label>
                         </div>-->        
 
-                    <button class="btn btn-primary btn-block py-3" type="submit" v-on:click="addEvent"><strong>Create Event</strong> </button>
+                    <button class="btn btn-primary btn-block py-3" type="submit" v-on:submit.prevent="addEvent"><strong>Create Event</strong> </button>
                         
                     </form>
                 </div>
@@ -73,10 +77,9 @@ export default {
                 'topic': '',
                 'description':'',
                 'location': '',
-                'audience': '',
-                'date': '',
-                'time':'',
-                'cost':''
+                'audience': ''
+               // 'date': '',
+                //'time':''
             }
         }
     },
@@ -106,37 +109,36 @@ export default {
                 this.errors.push('Audience of the event required.');
             }
 
-            if (!this.date) {
-                this.errors.push('Date of the event required.');
-            }
+            // if (!this.date) {
+            //     this.errors.push('Date of the event required.');
+            // }
 
-            if (!this.time) {
-                this.errors.push('Time of the event required.');
-            }
+            // if (!this.time) {
+            //     this.errors.push('Time of the event required.');
+            // }
 
-            e.preventDefault();
+            //e.preventDefault();
         },
         /*
         - Add the event to mutation, ADD_EVENT
         - data has not been sent to server (unpersisted data)
         */
         addEvent(){
-            if(this.checkForm){
+           // if(this.checkForm){}
                 const userEvent = {
                     topic: this.topic,
                     description: this.description,
                     location: this.location,
                     audience: this.audience,
-                    date: this.date,
-                    time: this.time
-                }
-
-                console.log("Can one console log here?")
-
-                this.$store.dispatch('ADD_EVENT', userEvent);
+                   // date: this.date,
+                    //time: this.time               
+               
             }
-
+            console.log("This is the event ", this.userEvent);
+            this.$store.dispatch('addEvent', this.userEvent);
         }
+
+        
     }
 }
 </script>

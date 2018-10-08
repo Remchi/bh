@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const state = {  
+    apiUrl: 'http://localhost:3000',
     events: []   
 }
 
@@ -26,7 +27,7 @@ const mutations = {
 const actions = {
     async getEvents(context, payload){
         try{
-            const response = await axios.get("/events", {
+            const response = await axios.get(state.apiUrl+"/events", {
                 data: payload
 
             });
@@ -39,12 +40,18 @@ const actions = {
 
     async addEvent(context, payload){
         try{
+<<<<<<< HEAD
             const response = await axios.post('/events',{
+=======
+            const response = await axios.post(state.apiUrl+'/events',{
+>>>>>>> dd1b77cfad2859714f7df0f203e173d81aaae482
                 data: payload,
                 headers: {'Content-Type':'application/json'}
             } );
 
+
             context.commit("ADD_EVENT", response.data);
+            console.log(response)
         }catch(error){
            alert(error);
         }
@@ -52,7 +59,7 @@ const actions = {
 
     async removeEvent(context, payload){
         try{
-            const response = await axios.delete('/events/:id',{
+            const response = await axios.delete(state.apiUrl+'/events/:id',{
                 data: payload,
                 headers: {'Content-Type':'application/json'}
             } );
@@ -66,7 +73,7 @@ const actions = {
 
     async updateEvent(context, payload){
         try{
-            const response = await axios.patch('/events/:id',{
+            const response = await axios.patch(state.apiUrl+'/events/:id',{
                 data: payload,
                 headers: {'Content-Type':'application/json'}
             } );

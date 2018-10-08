@@ -23,8 +23,8 @@ module.exports = {
                 description,
                 location,
                 audience,                
-                date,
-                time
+                //date,
+                //time
                // eventImage: req.file.path
             });
 
@@ -36,8 +36,8 @@ module.exports = {
                 createdEvent:{
                     Topic: commEvent.topic,
                     Description: commEvent.description,                    
-                    Type: commEvent.type,
-                    Date: commEvent.date,
+                    Audience: commEvent.audience,
+                    //Date: commEvent.date,
                     Location: commEvent.location
                     //Images: commEvent.eventImage
                 },

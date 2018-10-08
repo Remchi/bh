@@ -52,7 +52,7 @@ const upload = multer({
 
 router.route('/').post(validateBody(schemas.eventSchema), EventController.createEvent);
 
-//read many posts
+//read many event
 router.route('/').get(EventController.readEvents);
 //read a single post
 router.route('/:id').get(EventController.readEventById);

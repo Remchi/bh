@@ -53,8 +53,8 @@ module.exports = {
             description: Joi.string().required(),
             location: Joi.string().required(),
             audience: Joi.string().required(),
-            date: Joi.date(),
-            time: Joi.date().timestamp('unix'),
+            //date: Joi.date(),
+            //time: Joi.date().timestamp(),
             //eventImage:  Joi.string().dataUri()
         }),
 

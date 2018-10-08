@@ -13,10 +13,12 @@ const app = express();
 
 //Middlewares
 app.use(morgan('dev'));  //morgan is used to log to the console
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
 //makes the static folder public
 app.use('/uploads', express.static('uploads'));
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");

@@ -5,7 +5,7 @@
                 <div class="col-md-8 col-sm-10">
 
                     <h4 class="text-dark display-4">Add an Event</h4>
-                    <form action="" class="text-muted lead" enctype="multipart/form-data">
+                    <form method="POST" action="" class="text-muted lead" v-on:submit.prevent="sendFile" >
                     <div class="form-group">
                         <label for="topic">Topic of Event</label>
                         <input type="text" class="form-control form-control-lg" name="topic" id="topic" v-model="newEvent.topic" required>
@@ -27,16 +27,24 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 col-sm-10">
+                        <div class="col-md-4 col-sm-10">
                             <div class="form-group">
                                 <label for="date">Date of Event</label>
                                 <input type="text" class="form-control" name="date" id="date" placeholder="MM/DD/YYYY" v-model="newEvent.date" required>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-10">
+                        <div class="col-md-4 col-sm-10">
                             <div class="form-group">
                                 <label for="time">Time of Event</label>
                                 <input type="text" class="form-control" name="time" id="time" placeholder="HH:MM" v-model="newEvent.time" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-10">
+                            <div class="form-group">
+                                <label for="cost">COST ($)</label>
+                                <input type="text" class="form-control" name="cost" id="cost" placeholder="HH:MM" v-model="newEvent.cost" required>
+                                <span><small>Write 0.00 if it is free</small></span>
                             </div>
                         </div>
                     </div>                      
@@ -47,7 +55,7 @@
                             <label class="custom-file-label" for="attachment">Upload!</label>
                         </div>-->        
 
-                    <button class="btn btn-primary btn-block py-3" type="submit" v-on:click="goToPreview"><strong>Create Event</strong> </button>
+                    <button class="btn btn-primary btn-block py-3" type="submit" v-on:click="addEvent"><strong>Create Event</strong> </button>
                         
                     </form>
                 </div>
@@ -67,7 +75,8 @@ export default {
                 'location': '',
                 'audience': '',
                 'date': '',
-                'time':''
+                'time':'',
+                'cost':''
             }
         }
     },
@@ -121,7 +130,10 @@ export default {
                     date: this.date,
                     time: this.time
                 }
-                this.$store.commit('ADD_EVENT', this.userEvent);
+
+                console.log("Can one console log here?")
+
+                this.$store.dispatch('ADD_EVENT', userEvent);
             }
 
         }

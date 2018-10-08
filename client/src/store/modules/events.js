@@ -39,9 +39,9 @@ const actions = {
 
     async addEvent(context, payload){
         try{
-            const response = await axios.post('http://localhost:3000/events',{
+            const response = await axios.post('/events',{
                 data: payload,
-               // headers: {'Content-Type':'application/json'}
+                headers: {'Content-Type':'application/json'}
             } );
 
             context.commit("ADD_EVENT", response.data);

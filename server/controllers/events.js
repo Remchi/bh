@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+//const mongoose = require('mongoose')
 const communityEvent = require("../models/event")
 const User = require('../models/user')
 
@@ -6,8 +6,9 @@ module.exports = {
     //create a communityEvent
     createEvent: async(req, res, next)=>{
         try{
-            const {/*userId,*/ topic, description, location, audience, date} = req.value.body;
+            const {/*userId,*/ topic, description, location, audience, date, time} = req.value.body;
 
+            console.log("This is the req.value.body...", req.value.body);
             // const userExists = await User.findById(userId);
 
             // if(userExists.role!=="employer"){
@@ -17,7 +18,7 @@ module.exports = {
             // }
 
             const commEvent = new communityEvent({
-                _id: mongoose.Types.ObjectId(),
+                //_id: mongoose.Types.ObjectId(),
                 //userId,
                 topic,
                 description,

@@ -5,11 +5,7 @@
                 <div class="col-md-8 col-sm-10">
 
                     <h4 class="text-dark display-4">Add an Event</h4>
-<<<<<<< HEAD
-                    <form method="POST" action="" class="text-muted lead" v-on:submit.prevent="sendFile" >
-=======
                     <form action="" class="text-muted lead" >
->>>>>>> dd1b77cfad2859714f7df0f203e173d81aaae482
                     <div class="form-group">
                         <label for="topic">Topic of Event</label>
                         <input type="text" class="form-control form-control-lg" name="topic" id="topic" v-model="newEvent.topic" required>
@@ -69,7 +65,7 @@
 </template>
 
 <script>
-import {store} from "../store/store"
+import {store} from "../../store/store"
 export default {
     data(){
         return{
@@ -124,7 +120,7 @@ export default {
         - data has not been sent to server (unpersisted data)
         */
         addEvent(){
-           // if(this.checkForm){}
+            if(this.checkForm){
                 const userEvent = {
                     topic: this.topic,
                     description: this.description,
@@ -132,7 +128,7 @@ export default {
                     audience: this.audience,
                    // date: this.date,
                     //time: this.time               
-               
+               }
             }
             console.log("This is the event ", this.userEvent);
             this.$store.dispatch('addEvent', this.userEvent);

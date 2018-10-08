@@ -1,5 +1,5 @@
 import Home from './components/Home.vue'
-import AddEvent from './components/AddEvent.vue'
+import AddEvent from './components/events/AddEvent.vue'
 import PreviewEvent from './components/events/PreviewEvent.vue'
 import ViewEvents from './components/events/ViewEvents.vue'
 

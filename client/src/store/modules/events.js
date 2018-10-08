@@ -40,11 +40,7 @@ const actions = {
 
     async addEvent(context, payload){
         try{
-<<<<<<< HEAD
-            const response = await axios.post('/events',{
-=======
             const response = await axios.post(state.apiUrl+'/events',{
->>>>>>> dd1b77cfad2859714f7df0f203e173d81aaae482
                 data: payload,
                 headers: {'Content-Type':'application/json'}
             } );

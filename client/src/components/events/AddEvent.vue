@@ -5,7 +5,7 @@
                 <div class="col-md-8 col-sm-10">
 
                     <h4 class="text-dark display-4">Add an Event</h4>
-                    <form action="" class="text-muted lead" >
+                    <form v-on:submit.prevent="addEvent" class="text-muted lead" >
                     <div class="form-group">
                         <label for="topic">Topic of Event</label>
                         <input type="text" class="form-control form-control-lg" name="topic" id="topic" v-model="newEvent.topic" required>
@@ -55,7 +55,7 @@
                             <label class="custom-file-label" for="attachment">Upload!</label>
                         </div>-->        
 
-                    <button class="btn btn-primary btn-block py-3" type="submit" v-on:submit.prevent="addEvent"><strong>Create Event</strong> </button>
+                    <button class="btn btn-primary btn-block py-3" type="submit"><strong>Create Event</strong> </button>
                         
                     </form>
                 </div>
@@ -65,80 +65,82 @@
 </template>
 
 <script>
-import {store} from "../../store/store"
+import { store } from "../../store/store";
 export default {
-    data(){
-        return{
-            newEvent:{
-                'topic': '',
-                'description':'',
-                'location': '',
-                'audience': ''
-               // 'date': '',
-                //'time':''
-            }
-        }
+  data() {
+    return {
+      newEvent: {
+        topic: "",
+        description: "",
+        location: "",
+        audience: ""
+        // 'date': '',
+        //'time':''
+      }
+    };
+  },
+
+  methods: {
+    checkForm(e) {
+      if (
+        this.topic &&
+        this.description &&
+        this.location &&
+        this.audience &&
+        this.date &&
+        this.event
+      ) {
+        return true;
+      }
+
+      this.errors = [];
+
+      if (!this.topic) {
+        this.errors.push("Title of the event is required.");
+      }
+      if (!this.description) {
+        this.errors.push("Description of the event required.");
+      }
+
+      if (!this.location) {
+        this.errors.push("Location of the event required.");
+      }
+
+      if (!this.audience) {
+        this.errors.push("Audience of the event required.");
+      }
+
+      // if (!this.date) {
+      //     this.errors.push('Date of the event required.');
+      // }
+
+      // if (!this.time) {
+      //     this.errors.push('Time of the event required.');
+      // }
+
+      //e.preventDefault();
     },
-   
-
-    methods:{
-
-        checkForm(e) {
-            if (this.topic && this.description&&this.location&&this.audience&&this.date&&this.event) {
-                return true;
-            }
-
-            this.errors = [];
-
-            if (!this.topic) {
-                this.errors.push('Title of the event is required.');
-            }
-            if (!this.description) {
-                this.errors.push('Description of the event required.');
-            }
-
-            if (!this.location) {
-                this.errors.push('Location of the event required.');
-            }
-
-            if (!this.audience) {
-                this.errors.push('Audience of the event required.');
-            }
-
-            // if (!this.date) {
-            //     this.errors.push('Date of the event required.');
-            // }
-
-            // if (!this.time) {
-            //     this.errors.push('Time of the event required.');
-            // }
-
-            //e.preventDefault();
-        },
-        /*
+    /*
         - Add the event to mutation, ADD_EVENT
         - data has not been sent to server (unpersisted data)
         */
-        addEvent(){
-            if(this.checkForm){
-                const userEvent = {
-                    topic: this.topic,
-                    description: this.description,
-                    location: this.location,
-                    audience: this.audience,
-                   // date: this.date,
-                    //time: this.time               
-               }
-            }
-            console.log("This is the event ", this.userEvent);
-            this.$store.dispatch('addEvent', this.userEvent);
-        }
-
-        
+    addEvent() {
+      if (this.checkForm) {
+        const userEvent = {
+          topic: this.newEvent.topic,
+          description: this.newEvent.description,
+          location: this.newEvent.location,
+          audience: this.newEvent.audience
+          // date: this.date,
+          //time: this.time
+        };
+        console.log("This is the event ", this.userEvent);
+        this.$store.dispatch("addEvent", userEvent);
+      }
     }
-}
+  }
+};
 </script>
 
 <style>
-
 </style>
